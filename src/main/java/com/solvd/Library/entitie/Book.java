@@ -3,18 +3,20 @@ package com.solvd.Library.entitie;
 import java.util.Objects;
 
 public class Book {
-    int idBook;
-    String genre, tittle, author;
+    int idBook, price, stock;
+    String genre, title, author;
 
     public Book() {
 
     }
 
-    public Book(int idBook, String genre, String tittle, String author) {
+    public Book(int idBook, String genre, String title, String author, int price, int stock) {
         this.idBook = idBook;
         this.genre = genre;
-        this.tittle = tittle;
+        this.title = title;
         this.author = author;
+        this.price = price;
+        this.stock = stock;
     }
 
     public int getIdBook() {
@@ -33,12 +35,12 @@ public class Book {
         this.genre = category;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAuthor() {
@@ -49,30 +51,50 @@ public class Book {
         this.author = author;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return idBook == book.idBook && Objects.equals(genre, book.genre) && Objects.equals(tittle, book.tittle) && Objects.equals(author, book.author);
+        return idBook == book.idBook && Objects.equals(genre, book.genre) && Objects.equals(title, book.title) && Objects.equals(author, book.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idBook, genre, tittle, author);
+        return Objects.hash(idBook, genre, title, author);
     }
 
     @Override
     public String toString() {
-        return    "Book"
+        return    "\nBook"
                 + "\nId: "
                 + idBook
-                + "\nTittle: "
-                + tittle
+                + "\nTitle: "
+                + title
                 + "\nAuthor: "
                 + author
                 + "\nCategory: "
                 + genre
+                + "\nPrice: "
+                + price
+                + "\nStock: "
+                + stock
                 ;
     }
 }

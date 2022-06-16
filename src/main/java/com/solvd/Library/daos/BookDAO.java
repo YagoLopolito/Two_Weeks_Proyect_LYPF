@@ -22,9 +22,7 @@ public interface BookDAO extends DAO<Book, Integer>{
     @Override
     Book getById(int id) throws DAOException, ConnectException;
 
-    @Override
     List<Book> groupByGenre() throws DAOException, ConnectException;
 
-    @Override
     List<Book> groupByAuthor() throws DAOException, ConnectException;
 }

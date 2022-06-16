@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookDAOImpl extends AbstractJDBCDao implements BookDAO {
-    private final static String INSERT = "INSERT INTO book(idBook, genre, tittle, author) VALUES(?, ?, ?, ?)";
-    private final static String UPDATE = "UPDATE book SET genre = ?, tittle = ?, author = ? WHERE idBook = ?";
+    private final static String INSERT = "INSERT INTO book(idBook, genre, title, author, stock, price) VALUES(?, ?, ?, ?, ?, ?)";
+    private final static String UPDATE = "UPDATE book SET genre = ?, title = ?, author = ?, stock = ?, price = ? WHERE idBook = ?";
     private final static String DELETE = "DELETE FROM book WHERE idBook = ?";
-    private final static String GET_ALL = "SELECT idBook, genre, tittle, author FROM book";
-    private final static String GET_ONE = "SELECT idBook, genre, tittle, author FROM book WHERE idBook = ?";
-    private final static String GROUP_BY_GENRE = "SELECT * FROM book WHERE genre=?";
-    private final static String GROUP_BY_AUTHOR = "SELECT * FROM book WHERE author=?";
+    private final static String GET_ALL = "SELECT idBook, genre, title, author, stock, price FROM book";
+    private final static String GET_ONE = "SELECT idBook, genre, title, author, stock, price FROM book WHERE idBook = ?";
+    private final static String GROUP_BY_GENRE = "SELECT * FROM book WHERE genre = ?";
+    private final static String GROUP_BY_AUTHOR = "SELECT * FROM book WHERE author = \"?\" ";
 
     @Override
     public void insert(Book a) throws DAOException, ConnectException {
@@ -29,8 +29,10 @@ public class BookDAOImpl extends AbstractJDBCDao implements BookDAO {
             stat = conn.prepareStatement(INSERT);
             stat.setInt(1, a.getIdBook());
             stat.setString(2, a.getGenre());
-            stat.setString(3, a.getTittle());
+            stat.setString(3, a.getTitle());
             stat.setString(4, a.getAuthor());
+            stat.setInt(5, a.getStock());
+            stat.setInt(6, a.getPrice());
 
             if (stat.executeUpdate() == 0) {
                 throw new DAOException("May not have been saved");
@@ -85,9 +87,11 @@ public class BookDAOImpl extends AbstractJDBCDao implements BookDAO {
             stat = conn.prepareStatement(UPDATE);
 
             stat.setString(1, a.getGenre());
-            stat.setString(2, a.getTittle());
+            stat.setString(2, a.getTitle());
             stat.setString(3, a.getAuthor());
-            stat.setInt(4, a.getIdBook());
+            stat.setInt(4, a.getStock());
+            stat.setInt(5, a.getPrice());
+            stat.setInt(6, a.getIdBook());
 
             if (stat.executeUpdate() == 0) {
                 throw new DAOException("May not have been saved");
@@ -112,7 +116,7 @@ public class BookDAOImpl extends AbstractJDBCDao implements BookDAO {
         String genre = rs.getString("genre");
         String author  = rs.getString("author");
         Book books = new Book();
-        books.setIdBook(rs.getInt("idCar"));
+        books.setIdBook(rs.getInt("idBook"));
         return books;
     }
 
@@ -232,7 +236,7 @@ public class BookDAOImpl extends AbstractJDBCDao implements BookDAO {
         Connection conn = getConnection();
         ResultSet rs = null;
         List<Book> books = new ArrayList<>();
-        Book a = null;
+        Book a = new Book();
         try {
 
             stat = conn.prepareStatement(GROUP_BY_AUTHOR);

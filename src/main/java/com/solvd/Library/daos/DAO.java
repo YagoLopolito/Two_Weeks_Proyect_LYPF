@@ -16,7 +16,4 @@ public interface DAO<T, K> {
 
     T getById(int id) throws DAOException, ConnectException;
 
-    List<T> groupByGenre() throws DAOException, ConnectException;
-
-    List<T> groupByAuthor() throws DAOException, ConnectException;
 }
