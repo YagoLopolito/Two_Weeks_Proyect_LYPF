@@ -71,7 +71,7 @@ public class Book {
                 + tittle
                 + "\nAuthor: "
                 + author
-                + "\nCategory: "
+                + "\nGenre: "
                 + genre
                 ;
     }
