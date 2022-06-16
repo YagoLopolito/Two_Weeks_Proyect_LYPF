@@ -5,16 +5,15 @@ import com.solvd.Library.service.jdbcImpl.BookServiceImpl;
 
 import java.net.ConnectException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Runner {
     public static void main(String[] args) throws ConnectException {
-        Book Books = new Book();
-        BookServiceImpl kok = new BookServiceImpl();
-        Books.setIdBook(1);
-        Books.setAuthor("sas");
-        Books.setGenre("pom");
-        Books.setTittle("SANGUCHE");
-        kok.insert(Books);
+        BookServiceImpl bookService = new BookServiceImpl();
+        Book book = new Book();
 
+        book.setAuthor("Cortazar");
+
+        System.out.println(bookService.groupByAuthor());
     }
 }
