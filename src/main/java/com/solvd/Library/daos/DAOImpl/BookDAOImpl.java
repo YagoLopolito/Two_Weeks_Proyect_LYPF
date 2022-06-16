@@ -18,7 +18,8 @@ public class BookDAOImpl extends AbstractJDBCDao implements BookDAO {
     private final static String DELETE = "DELETE FROM book WHERE idBook = ?";
     private final static String GET_ALL = "SELECT idBook, genre, tittle, author FROM book";
     private final static String GET_ONE = "SELECT idBook, genre, tittle, author FROM book WHERE idBook = ?";
-    private final static String GROUP_BY = "SELECT genre FROM book GROUP BY genre";
+    private final static String GROUP_BY_GENRE = "SELECT * FROM book WHERE genre=?";
+    private final static String GROUP_BY_AUTHOR = "SELECT * FROM book WHERE author=?";
 
     @Override
     public void insert(Book a) throws DAOException, ConnectException {
@@ -84,9 +85,9 @@ public class BookDAOImpl extends AbstractJDBCDao implements BookDAO {
             stat = conn.prepareStatement(UPDATE);
 
             stat.setString(1, a.getGenre());
-            stat.setString(2, a.getModel());
-            stat.setInt(3, a.getMaxSpeed());
-            stat.setInt(4, a.getIdCar());
+            stat.setString(2, a.getTittle());
+            stat.setString(3, a.getAuthor());
+            stat.setInt(4, a.getIdBook());
 
             if (stat.executeUpdate() == 0) {
                 throw new DAOException("May not have been saved");
@@ -188,17 +189,22 @@ public class BookDAOImpl extends AbstractJDBCDao implements BookDAO {
         }
         return a;
     }
-    public List<Book> groupBy() throws DAOException, ConnectException {
+    public List<Book>  groupByGenre() throws DAOException, ConnectException {
         PreparedStatement stat = null;
         Connection conn = getConnection();
         ResultSet rs = null;
         List<Book> books = new ArrayList<>();
+        Book a = null;
         try {
-            stat = conn.prepareStatement(GROUP_BY);
+
+            stat = conn.prepareStatement(GROUP_BY_GENRE);
+            stat.setString(1, a.getGenre());
             rs = stat.executeQuery();
+
             while (rs.next()) {
                 books.add(convert(rs));
             }
+
         } catch (SQLException e) {
             throw new DAOException("SQL ERROR.", e);
         } finally {
@@ -221,6 +227,45 @@ public class BookDAOImpl extends AbstractJDBCDao implements BookDAO {
         }
         return books;
     }
+    public List<Book>  groupByAuthor() throws DAOException, ConnectException {
+        PreparedStatement stat = null;
+        Connection conn = getConnection();
+        ResultSet rs = null;
+        List<Book> books = new ArrayList<>();
+        Book a = null;
+        try {
+
+            stat = conn.prepareStatement(GROUP_BY_AUTHOR);
+            stat.setString(1, a.getAuthor());
+            rs = stat.executeQuery();
+
+            while (rs.next()) {
+                books.add(convert(rs));
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException("SQL ERROR.", e);
+        } finally {
+            returnConnection(conn);
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    new DAOException("SQL ERROR.", e);
+                }
+            }
+            if (stat != null) {
+                try {
+                    stat.close();
+                } catch (SQLException e) {
+                    new DAOException("SQL ERROR.", e);
+                }
+            }
+
+        }
+        return books;
+    }
+
 
 
 }
