@@ -19,6 +19,12 @@ public class Client {
         this.documentation = documentation;
     }
 
+    public Client(String first_name, String last_name, Integer documentation) {
+        this.firstName=first_name;
+        this.lastName=last_name;
+        this.documentation=documentation;
+    }
+
     public int getIdClient() {
         return idClient;
     }
