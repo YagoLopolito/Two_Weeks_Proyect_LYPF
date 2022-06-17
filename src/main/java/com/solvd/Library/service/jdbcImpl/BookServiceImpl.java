@@ -48,19 +48,28 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> groupByGenre() throws ConnectException {
+    public List<Book> groupByGenre(Book a) throws ConnectException {
         BookDAO book = new BookDAOImpl();
         List<Book> bookList;
-        bookList = book.groupByGenre();
+        bookList = book.groupByGenre(a);
 
         return bookList;
     }
 
     @Override
-    public List<Book> groupByAuthor() throws ConnectException {
+    public List<Book> groupByAuthor(Book a) throws ConnectException {
         BookDAO book = new BookDAOImpl();
         List<Book> bookList;
-        bookList = book.groupByAuthor();
+        bookList = book.groupByAuthor(a);
+
+        return bookList;
+    }
+
+    @Override
+    public List<Book> groupByAuthorAndGenre(Book a) throws ConnectException {
+        BookDAO book = new BookDAOImpl();
+        List<Book> bookList;
+        bookList = book.groupByAuthor(a);
 
         return bookList;
     }

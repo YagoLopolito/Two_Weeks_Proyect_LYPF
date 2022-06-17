@@ -82,7 +82,8 @@ public class Book {
 
     @Override
     public String toString() {
-        return    "\nBook"
+        return "\n-------------------------------------------------------------"
+                + "\nBook"
                 + "\nId: "
                 + idBook
                 + "\nTitle: "
@@ -95,6 +96,7 @@ public class Book {
                 + price
                 + "\nStock: "
                 + stock
+                + "\n"
                 ;
     }
 }
