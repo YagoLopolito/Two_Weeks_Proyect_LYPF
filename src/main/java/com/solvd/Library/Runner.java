@@ -12,5 +12,8 @@ import java.util.List;
 public class Runner {
     public static void main(String[] args) throws ConnectException {
 
+        book.setAuthor("Cortazar");
+
+        System.out.println(bookService.groupByAuthor());
     }
 }
