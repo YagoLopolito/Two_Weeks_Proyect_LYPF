@@ -89,7 +89,7 @@ public class Book {
                 + title
                 + "\nAuthor: "
                 + author
-                + "\nCategory: "
+                + "\nGenre: "
                 + genre
                 + "\nPrice: "
                 + price
