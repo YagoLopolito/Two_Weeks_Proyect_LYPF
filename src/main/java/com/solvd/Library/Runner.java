@@ -1,6 +1,5 @@
 package com.solvd.Library;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solvd.Library.daos.BookDAO;
 import com.solvd.Library.daos.DAOImpl.BookDAOimpl;
 import com.solvd.Library.entitie.Book;
