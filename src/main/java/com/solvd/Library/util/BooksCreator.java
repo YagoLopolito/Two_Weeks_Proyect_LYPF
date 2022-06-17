@@ -142,7 +142,6 @@ public class BooksCreator {
         stockList.add(10);
 
 
-
         for (int i = 0; i <= cant; i = i + 1) {
 
             book.setIdBook(i);

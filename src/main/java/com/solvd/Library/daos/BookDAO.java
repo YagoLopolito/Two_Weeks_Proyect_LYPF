@@ -6,7 +6,7 @@ import com.solvd.Library.exception.DAOException;
 import java.net.ConnectException;
 import java.util.List;
 
-public interface BookDAO extends DAO<Book, Integer>{
+public interface BookDAO extends DAO<Book, Integer> {
     @Override
     void insert(Book a) throws DAOException, ConnectException;
 
@@ -22,7 +22,9 @@ public interface BookDAO extends DAO<Book, Integer>{
     @Override
     Book getById(int id) throws DAOException, ConnectException;
 
-    List<Book> groupByGenre() throws DAOException, ConnectException;
+    List<Book> groupByGenre(Book a) throws DAOException, ConnectException;
 
-    List<Book> groupByAuthor() throws DAOException, ConnectException;
+    List<Book> groupByAuthor(Book a) throws DAOException, ConnectException;
+
+    List<Book> groupByAuthorAndGenre(Book a) throws DAOException, ConnectException;
 }

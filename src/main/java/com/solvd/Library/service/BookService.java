@@ -16,8 +16,10 @@ public interface BookService {
 
     List<Book> getAll() throws ConnectException;
 
-    List<Book> groupByGenre() throws ConnectException;
+    List<Book> groupByGenre(Book a) throws ConnectException;
 
-    List<Book> groupByAuthor() throws ConnectException;
+    List<Book> groupByAuthor(Book a) throws ConnectException;
+
+    List<Book> groupByAuthorAndGenre(Book a) throws ConnectException;
 
 }

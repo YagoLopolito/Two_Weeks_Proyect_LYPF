@@ -82,19 +82,21 @@ public class Book {
 
     @Override
     public String toString() {
-        return    "\nBook"
+        return "\n-------------------------------------------------------------"
+                + "\nBook"
                 + "\nId: "
                 + idBook
                 + "\nTitle: "
                 + title
                 + "\nAuthor: "
                 + author
-                + "\nCategory: "
+                + "\nGenre: "
                 + genre
                 + "\nPrice: "
                 + price
                 + "\nStock: "
                 + stock
+                + "\n"
                 ;
     }
 }
