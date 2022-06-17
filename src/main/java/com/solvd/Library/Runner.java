@@ -3,10 +3,12 @@ package com.solvd.Library;
 import com.solvd.Library.daos.BookDAO;
 import com.solvd.Library.daos.DAOImpl.BookDAOImpl;
 import com.solvd.Library.entitie.Book;
+import com.solvd.Library.entitie.Client;
 import com.solvd.Library.service.jdbcImpl.BookServiceImpl;
 import com.solvd.Library.util.BooksCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.solvd.Library.service.jdbcImpl.ClientServiceImpl;
 
 import java.net.ConnectException;
 import java.util.ArrayList;
