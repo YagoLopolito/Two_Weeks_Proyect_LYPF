@@ -1,17 +1,17 @@
 package com.solvd.Library;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solvd.Library.daos.BookDAO;
-import com.solvd.Library.daos.DAOImpl.BookDAOImpl;
+import com.solvd.Library.daos.DAOImpl.BookDAOimpl;
 import com.solvd.Library.entitie.Book;
+import com.solvd.Library.entitie.Checkout;
 import com.solvd.Library.entitie.Client;
-import com.solvd.Library.service.jdbcImpl.BookServiceImpl;
-import com.solvd.Library.util.BooksCreator;
+import com.solvd.Library.service.jacksonImpl.JacksonImpl;
+import com.solvd.Library.service.jdbcImpl.ClientServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.solvd.Library.service.jdbcImpl.ClientServiceImpl;
 
 import java.net.ConnectException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,24 +19,44 @@ public class Runner {
     private static final Logger log = LogManager.getLogger(Runner.class);
 
     public static void main(String[] args) throws ConnectException {
-        BookDAO bookService = new BookDAOImpl();
+        ClientServiceImpl clientService = new ClientServiceImpl();
+        BookDAO bookService = new BookDAOimpl();
         Book book = new Book();
         Scanner scannerName = new Scanner(System.in);
-
-//        log.info("Hello! Please entry your name: ");
-//        client.setName(scannerName.nextLine());
-//        Scanner scannerLastName = new Scanner(System.in);
-//        log.info("\nNow please entry your last name: ");
-//        client.setLastName(scannerLastName.nextLine());
-//        Scanner scannerDocument = new Scanner(System.in);
-//        log.info("\nAnd lastly please entry your document Nº: ");
-//        client.setDocument(scannerDocument.nextInt());
-
-        log.info("Hi " + "\nDo you want to: \n1- Sort the list of books by genre."
-                + "\n2- Sort the list of books by author.\n3- Sort the list of books by author and genre.");
+        Client client = new Client();
         Scanner scannerOption = new Scanner(System.in);
 
+        log.info("\nDid you have an id?\n1- Yes\n2- No, i want to create a new profile");
         switch (scannerOption.nextInt()) {
+            case 1:
+         log.info("\nWhat`s your id?");
+         Scanner scannerClientId = new Scanner(System.in);
+         int id= scannerClientId.nextInt();
+         log.info("We are searching you in the database, please wait.");
+         log.info( "Hi " + clientService.getById(id));
+                break;
+            case 2:
+                log.info("Hello! Please entry your name: ");
+                client.setFirstName(scannerName.nextLine());
+                Scanner scannerLastName = new Scanner(System.in);
+                log.info("\nNow please entry your last name: ");
+                client.setLastName(scannerLastName.nextLine());
+                Scanner scannerDocument = new Scanner(System.in);
+                log.info("\nAnd lastly please entry your document Nº: ");
+                client.setDocumentation(scannerDocument.nextInt());
+                client.setIdClient((int) (Math.random() * 1000));
+                log.info("we are entering you in our database, your id is: " + client.getIdClient() + ", please wait...");
+                clientService.insert(client);
+                break;
+        }
+
+
+        log.info( "\nDo you want to: \n1- Sort the list of books by genre."
+                + "\n2- Sort the list of books by author.\n3- Sort the list of books by author and genre."
+                + "\n4- Read our Checkout List Json");
+        Scanner scannerOption2 = new Scanner(System.in);
+
+        switch (scannerOption2.nextInt()) {
             case 1:
                 log.info("Did you want to see the list of:\n1- Adventure books\n2- Drama books\n3- Science Fiction books" +
                         "\n4- Romance books\n5- Mystery books\n6- Thriller books\n7- Gothic books\n8- Comics" +
@@ -1183,6 +1203,12 @@ public class Runner {
                         }
                         break;
                 }
+                break;
+            case 4:
+                JacksonImpl jackson = new JacksonImpl();
+                List<Checkout> checkoutList;
+                checkoutList = jackson.unmarshallCheckout();
+                log.info(checkoutList);
                 break;
         }
     }

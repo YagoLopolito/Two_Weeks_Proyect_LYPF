@@ -1,0 +1,37 @@
+[
+  {
+    "idCheckouts": "1",
+    "idBook": "645",
+    "dueBy": "06/18/2022"
+  },
+  {
+    "idCheckouts": "10",
+    "idBook": "10",
+    "dueBy": "07/20/2022"
+  },
+  {
+    "idCheckouts": "12",
+    "idBook": "142",
+    "dueBy": "09/19/2022"
+  },
+  {
+    "idCheckouts": "3",
+    "idBook": "54",
+    "dueBy": "10/01/2022"
+  },
+  {
+    "idCheckouts": "231",
+    "idBook": "235",
+    "dueBy": "07/08/2022"
+  },
+  {
+    "idCheckouts": "31",
+    "idBook": "451",
+    "dueBy": "07/28/2022"
+  },
+  {
+    "idCheckouts": "211",
+    "idBook": "412",
+    "dueBy": "08/12/2022"
+  }
+]

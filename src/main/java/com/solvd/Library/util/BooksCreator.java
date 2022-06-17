@@ -1,7 +1,6 @@
 package com.solvd.Library.util;
 
 import com.solvd.Library.entitie.Book;
-import com.solvd.Library.service.jacksonImpl.JacksonImpl;
 import com.solvd.Library.service.jdbcImpl.BookServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BooksCreator {
     private static final Logger log = LogManager.getLogger(BooksCreator.class);
@@ -16,7 +16,7 @@ public class BooksCreator {
     public static void main(String[] args) throws ConnectException {
         Book book = new Book();
         BookServiceImpl books = new BookServiceImpl();
-        int cant = 1000;
+        int cant;
         int num = (int) (Math.random() * 62);
         int num2 = (int) (Math.random() * 62);
         int num3 = (int) (Math.random() * 62);
@@ -25,6 +25,7 @@ public class BooksCreator {
         int num6 = (int) (Math.random() * 14);
         int num7 = (int) (Math.random() * 6);
         int num8 = (int) (Math.random() * 10);
+
 
         List<String> titleWords = new ArrayList<>();
         titleWords.add("");
@@ -110,7 +111,7 @@ public class BooksCreator {
         genreList.add("Romance");
         genreList.add("Mystery");
         genreList.add("Thriller");
-        genreList.add("Gotic");
+        genreList.add("Gothic");
         genreList.add("Comic");
         genreList.add("Manga");
         genreList.add("Fantasy");
@@ -140,35 +141,55 @@ public class BooksCreator {
         stockList.add(8);
         stockList.add(9);
         stockList.add(10);
+        Scanner scanner = new Scanner(System.in);
+        log.info("Did you want to:\n1- Generate some books\n2- Delete all books");
+        switch (scanner.nextInt()) {
+
+            case 1:
+                Scanner scannerCant = new Scanner(System.in);
+                log.info("How many books do you want to generate: ");
+                cant = scannerCant.nextInt();
+                for (int i = 0; i <= cant; i = i + 1) {
+
+                    book.setIdBook(i);
+                    book.setTitle(titleWords.get(num)
+                            + titleWords.get(num2)
+                            + titleWords.get(num3)
+                            + titleWords.get(num4));
+
+                    book.setAuthor(authors.get(num5));
+
+                    book.setGenre(genreList.get(num6));
+
+                    book.setPrice(priceList.get(num7));
+
+                    book.setStock(stockList.get(num8));
 
 
-        for (int i = 0; i <= cant; i = i + 1) {
-
-            book.setIdBook(i);
-            book.setTitle(titleWords.get(num)
-                    + titleWords.get(num2)
-                    + titleWords.get(num3)
-                    + titleWords.get(num4));
-
-            book.setAuthor(authors.get(num5));
-
-            book.setGenre(genreList.get(num6));
-
-            book.setPrice(priceList.get(num7));
-
-            book.setStock(stockList.get(num8));
+                    books.insert(book);
+                    log.info("-* " + book);
+                    num = (int) (Math.random() * 62);
+                    num2 = (int) (Math.random() * 62);
+                    num3 = (int) (Math.random() * 62);
+                    num4 = (int) (Math.random() * 62);
+                    num5 = (int) (Math.random() * 10);
+                    num6 = (int) (Math.random() * 15);
+                    num7 = (int) (Math.random() * 6);
+                    num8 = (int) (Math.random() * 10);
+                }
+                    break;
 
 
-            books.insert(book);
-            log.info("-* " + book);
-            num = (int) (Math.random() * 62);
-            num2 = (int) (Math.random() * 62);
-            num3 = (int) (Math.random() * 62);
-            num4 = (int) (Math.random() * 62);
-            num5 = (int) (Math.random() * 10);
-            num6 = (int) (Math.random() * 15);
-            num7 = (int) (Math.random() * 6);
-            num8 = (int) (Math.random() * 10);
+            case 2:
+                log.info("How many books do you want to delete: ");
+                Scanner scannerCant2 = new Scanner(System.in);
+                cant = scannerCant2.nextInt();
+                for (int i = 0; i <= cant; i = i + 1) {
+
+                    book.setIdBook(i);
+                    books.deleteById(i);
+                }
+                break;
         }
     }
 }
