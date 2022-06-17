@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDAOImpl extends AbstractJDBCDao implements BookDAO {
+public class BookDAOimpl extends AbstractJDBCDao implements BookDAO {
     private final static String INSERT = "INSERT INTO book(idBook, genre, title, author, stock, price) VALUES(?, ?, ?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE book SET genre = ?, title = ?, author = ?, stock = ?, price = ? WHERE idBook = ?";
     private final static String DELETE = "DELETE FROM book WHERE idBook = ?";
